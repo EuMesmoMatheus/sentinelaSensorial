@@ -35,7 +35,7 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 ## Requisitos do Sistema
 
 ### Requisitos Funcionais
-1. **Captura de Imagens**:
+1. **Captura de Imagens**: <br> 
    1.1 *Reconhecimento de FACE feito com Biblioteca `face_recognition`.*
    1.2 *Captura da Imagem deve ocorrer após reconhecimento de FACE.*
 2. **Armazenamento de Imagens**:
