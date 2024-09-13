@@ -35,20 +35,20 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 ## Requisitos do Sistema
 
 ### Requisitos Funcionais
-1. **Captura de Imagens**: <br> 
-   1.1 *Reconhecimento de FACE feito com Biblioteca `face_recognition`.* <br>
-   1.2 *Captura da Imagem deve ocorrer após reconhecimento de FACE.* <br>
-2. **Armazenamento de Imagens**: 
-   2.2 *Armazenamento de Imagem em repositorio no ambiente local "pasta x"* <br>
-3. **Identificação Facial**:
-   3.1 *Utilizar imagem armazenada para validação facial com database.* <br>
-   3.2 *Consulta em database local, com imagens dos estudantes "pasta y".* <br>
-   3.3 *Utilização da biblioteca `face_recognition` para percorrer todas as imagens cadastradas no database e encontrar a mais semelhante.* <br>
-4. **Envio de E-mails**:
-   4.1 *Quando rosto é reconhecido, enviar e-mail para responsavel contento: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).* <br>
-   4.2  *Quando rosto não é reconhecido, enviar e-mail para responsavel contento: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).* <br>
-5. **Armazenamento de Segurança**:
-   5.1 *TODO fim de turno, os arquivos armazenados na pasta X, será feito um backup das imagens do dia é criado uma pasta de backup (.zip), após armazenamento pasta X é limpa.* <br>
+1. **Captura de Imagens**:<br> 
+   1.1 *Reconhecimento de FACE feito com Biblioteca `face_recognition`.*<br>
+   1.2 *Captura da Imagem deve ocorrer após reconhecimento de FACE.*<br>
+2. **Armazenamento de Imagens**:<br>
+   2.2 *Armazenamento de Imagem em repositorio no ambiente local "pasta x"*<br>
+3. **Identificação Facial**:<br>
+   3.1 *Utilizar imagem armazenada para validação facial com database.*<br>
+   3.2 *Consulta em database local, com imagens dos estudantes "pasta y".*<br>
+   3.3 *Utilização da biblioteca `face_recognition` para percorrer todas as imagens cadastradas no database e encontrar a mais semelhante.*<br>
+4. **Envio de E-mails**:<br>
+   4.1 *Quando rosto é reconhecido, enviar e-mail para responsavel contento: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
+   4.2  *Quando rosto não é reconhecido, enviar e-mail para responsavel contento: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
+5. **Armazenamento de Segurança**:<br>
+   5.1 *TODO fim de turno, os arquivos armazenados na pasta X, será feito um backup das imagens do dia é criado uma pasta de backup (.zip), após armazenamento pasta X é limpa.*<br>
 
 ### Requisitos Não Funcionais
 1. **Precisão de Reconhecimento**:
