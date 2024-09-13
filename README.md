@@ -37,24 +37,24 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 ### Requisitos Funcionais
 1. **Captura de Imagens**:<br> 
    1.1 *Reconhecimento de FACE feito com Biblioteca `face_recognition`.*<br>
-   1.2 *Captura da Imagem deve ocorrer após reconhecimento de FACE.*<br>
+   1.2 *Captura da Imagem deve ocorrer após reconhecimento de FACE, feito com a biblioteca `OpenCV`.*<br>
 2. **Armazenamento de Imagens**:<br>
-   2.2 *Armazenamento de Imagem em repositorio no ambiente local "pasta x"*<br>
+   2.2 *Armazenamento de Imagem em repositório no ambiente local "pasta x"*<br>
 3. **Identificação Facial**:<br>
    3.1 *Utilizar imagem armazenada para validação facial com database.*<br>
    3.2 *Consulta em database local, com imagens dos estudantes "pasta y".*<br>
    3.3 *Utilização da biblioteca `face_recognition` para percorrer todas as imagens cadastradas no database e encontrar a mais semelhante.*<br>
 4. **Envio de E-mails**:<br>
-   4.1 *Quando rosto é reconhecido, enviar e-mail para responsavel contento: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
-   4.2  *Quando rosto não é reconhecido, enviar e-mail para responsavel contento: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
+   4.1 *Quando rosto é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
+   4.2 *Quando rosto não é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
 5. **Armazenamento de Segurança**:<br>
-   5.1 *TODO fim de turno, os arquivos armazenados na pasta X, será feito um backup das imagens do dia é criado uma pasta de backup (.zip), após armazenamento pasta X é limpa.*<br>
+   5.1 *Ao fim do turno, as imagens armazenadas na pasta X são compactadas em um arquivo .zip para backup. Em seguida, a pasta X é limpa.*<br>
 
 ### Requisitos Não Funcionais
 1. **Precisão de Reconhecimento**:
-   - O sistema deve garantir alta precisão no reconhecimento facial, com ajustes para qualidade de imagem e iluminação (Implementação em PYTHON). 
+   - O sistema deve garantir alta precisão no reconhecimento facial, com ajustes para qualidade de imagem e iluminação (Biblioteca `OpenCV`para pós processamento). 
 2. **Capacidade de Processamento**:
-   - O notebook/computador deve ter uma webcam com qualidade semelhante a 720p.
+   - O notebook/computador deve ter uma webcam com qualidade mínima de 720p.
 3. **Segurança e Privacidade de Dados**:
    - As imagens e dados dos alunos devem ser protegidos durante o armazenamento e a transmissão de informações (via e-mail).
 4. **Escalabilidade**:
@@ -62,11 +62,23 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 5. **Facilidade de Uso**:
    - O sistema deve ser simples de usar, com um fluxo de trabalho eficiente para professores e administradores.
 6. **Disponibilidade**:
-   - O sistema deve estar disponível durante todo o horário escolar, sem interrupções. (Backup de Imagens apenas após as 23:00)
+   - O sistema deve estar disponível durante todo o horário escolar, sem interrupções. (Backup de imagens apenas após as 23:00)
 7. **Custo e Acessibilidade**:
-   - O projeto deve ser acessível, utilizando interface simples e facil instalação.
+   - O projeto deve ser acessível, utilizando interface simples e de fácil instalação.
 8. **Tempo de Resposta**:
    - O sistema deve processar e enviar notificações em tempo hábil (preferencialmente em segundos).
+
+## Equipamentos Utilizados
+- **Webcam do Notebook**: Captura imagens dos alunos ao detectar movimento.
+- **Notebook/Computador com Acesso à Internet**: Utilizado para processamento das imagens e envio de notificações via e-mail.
+- **Roteador Wi-Fi**: Necessário para a conectividade e transmissão de dados entre dispositivos IoT e o sistema.
+- **Sensor de Movimento (Opcional)**: Pode ser utilizado para complementar a detecção de presença além da webcam.
+
+## Tecnologias Utilizadas
+- **Python**: Linguagem principal para desenvolvimento do sistema.
+- **Biblioteca `face_recognition`**: Responsável pelo reconhecimento facial dos alunos com base nas imagens capturadas.
+- **Biblioteca `smtplib`**: Utilizada para envio de e-mails automáticos de notificações.
+- **OpenCV**: Usada para captura de imagem e processamento adicional.
 
 ## Benefícios do Projeto
 - **Segurança Aumentada**: O sistema ajuda a identificar automaticamente alunos e alertar sobre a presença de indivíduos não identificados.
@@ -80,8 +92,9 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 
 ## Como Executar o Projeto
 
-### Pré-requisitos:
+### Pré-requisitos
 
 Instale as dependências:
 
 ```bash
+pip install face_recognition opencv-python smtplib
