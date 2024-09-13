@@ -71,8 +71,6 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 ## Equipamentos Utilizados
 - **Webcam do Notebook**: Captura imagens dos alunos ao detectar movimento.
 - **Notebook/Computador com Acesso à Internet**: Utilizado para processamento das imagens e envio de notificações via e-mail.
-- **Roteador Wi-Fi**: Necessário para a conectividade e transmissão de dados entre dispositivos IoT e o sistema.
-- **Sensor de Movimento (Opcional)**: Pode ser utilizado para complementar a detecção de presença além da webcam.
 
 ## Tecnologias Utilizadas
 - **Python**: Linguagem principal para desenvolvimento do sistema.
