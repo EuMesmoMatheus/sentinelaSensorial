@@ -1,0 +1,2 @@
+# sentinelaSensorial
+Projeto IOT
