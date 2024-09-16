@@ -36,19 +36,19 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 
 ### Requisitos Funcionais
 1. **Captura de Imagens**:<br> 
-   1.1 *Reconhecimento de FACE feito com Biblioteca `face_recognition`.*<br>
-   1.2 *Captura da Imagem deve ocorrer após reconhecimento de FACE, feito com a biblioteca `OpenCV`.*<br>
+   1.1 Reconhecimento de FACE feito com Biblioteca `face_recognition`.<br>
+   1.2 Captura da Imagem deve ocorrer após reconhecimento de FACE, feito com a biblioteca `OpenCV`.<br>
 2. **Armazenamento de Imagens**:<br>
-   2.2 *Armazenamento de Imagem em repositório no ambiente local "pasta x"*<br>
+   2.2 Armazenamento de Imagem em repositório no ambiente local "pasta x"<br>
 3. **Identificação Facial**:<br>
-   3.1 *Utilizar imagem armazenada para validação facial com database.*<br>
-   3.2 *Consulta em database local, com imagens dos estudantes "pasta y".*<br>
-   3.3 *Utilização da biblioteca `face_recognition` para percorrer todas as imagens cadastradas no database e encontrar a mais semelhante.*<br>
+   3.1 Utilizar imagem armazenada para validação facial com database.<br>
+   3.2 Consulta em database local, com imagens dos estudantes "pasta y".<br>
+   3.3 Utilização da biblioteca `face_recognition` para percorrer todas as imagens cadastradas no database e encontrar a mais semelhante.<br>
 4. **Envio de E-mails**:<br>
-   4.1 *Quando rosto é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
-   4.2 *Quando rosto não é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).*<br>
+   4.1 Quando rosto é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).<br>
+   4.2 Quando rosto não é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).<br>
 5. **Armazenamento de Segurança**:<br>
-   5.1 *Ao fim do turno, as imagens armazenadas na pasta X são compactadas em um arquivo .zip para backup. Em seguida, a pasta X é limpa.*<br>
+   5.1 Ao fim do turno, as imagens armazenadas na pasta X são compactadas em um arquivo .zip para backup. Em seguida, a pasta X é limpa.<br>
 
 ### Requisitos Não Funcionais
 1. **Precisão de Reconhecimento**:
