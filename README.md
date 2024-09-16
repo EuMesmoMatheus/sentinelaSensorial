@@ -13,6 +13,16 @@ Catolica SC
 ## Introdução
 O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente para salas de aula, utilizando tecnologias de IoT e inteligência artificial (IA). O objetivo é automatizar o monitoramento e a identificação dos alunos, melhorando a segurança e o registro de presença.
 
+## Equipamentos Utilizados
+- **Webcam do Notebook**: Captura imagens dos alunos ao detectar movimento.
+- **Notebook/Computador com Acesso à Internet**: Utilizado para processamento das imagens e envio de notificações via e-mail.
+
+## Tecnologias Utilizadas
+- **Python**: Linguagem principal para desenvolvimento do sistema.
+- **Biblioteca `face_recognition`**: Responsável pelo reconhecimento facial dos alunos com base nas imagens capturadas.
+- **Biblioteca `smtplib`**: Utilizada para envio de e-mails automáticos de notificações.
+- **OpenCV**: Usada para captura de imagem e processamento adicional.
+
 ## Como o Projeto Funciona
 
 ### Componentes Utilizados
@@ -36,19 +46,19 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 
 ### Requisitos Funcionais
 1. **Captura de Imagens**:<br> 
-   1.1 Reconhecimento de FACE feito com Biblioteca `face_recognition`.<br>
-   1.2 Captura da Imagem deve ocorrer após reconhecimento de FACE, feito com a biblioteca `OpenCV`.<br>
+   1.1 O reconhecimento da FACE humana deverá ser feito com Biblioteca `face_recognition`.<br>
+   1.2 A captura da imagem deverá ocorrer após o reconhecimento da FACE, através da biblioteca `OpenCV`.<br>
 2. **Armazenamento de Imagens**:<br>
-   2.2 Armazenamento de Imagem em repositório no ambiente local "pasta x"<br>
+   2.1 A imagem capturada deverá ser armazenada em uma pasta "pasta x" local.<br>
 3. **Identificação Facial**:<br>
-   3.1 Utilizar imagem armazenada para validação facial com database.<br>
-   3.2 Consulta em database local, com imagens dos estudantes "pasta y".<br>
-   3.3 Utilização da biblioteca `face_recognition` para percorrer todas as imagens cadastradas no database e encontrar a mais semelhante.<br>
+   3.1 O sistema deverá comparar a face capturada, com todas as faces dos estudantes armazenadas em uma pasta local “Pasta Y”, utilizando a biblioteca `face_recognition`. <br>
+3.2 O sistema deverá encontrar a imagem mais semelhante.<br>
 4. **Envio de E-mails**:<br>
-   4.1 Quando rosto é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).<br>
-   4.2 Quando rosto não é reconhecido com a biblioteca `smtplib`, enviar e-mail para responsável contendo: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).<br>
+   4.1 Se o rosto for reconhecido, deverá enviar um e-mail para o responsável contendo: Dados da Imagem no Database (Pasta Y) + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).<br>
+   4.2 Se o rosto não for reconhecido, deverá enviar um e-mail para o responsável contendo: Mensagem de estudante não identificado + dia/mês/ano, hora:minutos + Foto Capturada. (Pasta X).<br>
+4.3 Para o envio de e-mails, deverá ser utilizada a biblioteca `smtplib`<br>
 5. **Armazenamento de Segurança**:<br>
-   5.1 Ao fim do turno, as imagens armazenadas na pasta X são compactadas em um arquivo .zip para backup. Em seguida, a pasta X é limpa.<br>
+   5.1 Ao fim do turno, as imagens armazenadas na pasta X deverão ser compactadas em um arquivo .zip para backup, após, a pasta X deverá ser limpa.<br>
 
 ### Requisitos Não Funcionais
 1. **Precisão de Reconhecimento**:
@@ -67,16 +77,6 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
    - O projeto deve ser acessível, utilizando interface simples e de fácil instalação.
 8. **Tempo de Resposta**:
    - O sistema deve processar e enviar notificações em tempo hábil (preferencialmente em segundos).
-
-## Equipamentos Utilizados
-- **Webcam do Notebook**: Captura imagens dos alunos ao detectar movimento.
-- **Notebook/Computador com Acesso à Internet**: Utilizado para processamento das imagens e envio de notificações via e-mail.
-
-## Tecnologias Utilizadas
-- **Python**: Linguagem principal para desenvolvimento do sistema.
-- **Biblioteca `face_recognition`**: Responsável pelo reconhecimento facial dos alunos com base nas imagens capturadas.
-- **Biblioteca `smtplib`**: Utilizada para envio de e-mails automáticos de notificações.
-- **OpenCV**: Usada para captura de imagem e processamento adicional.
 
 ## Benefícios do Projeto
 - **Segurança Aumentada**: O sistema ajuda a identificar automaticamente alunos e alertar sobre a presença de indivíduos não identificados.
