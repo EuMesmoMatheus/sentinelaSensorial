@@ -2,8 +2,8 @@ import os
 import zipfile
 from datetime import datetime
 
-PASTA_X = 'captured_images/'  # Pasta com as imagens capturadas
-BACKUP_DIR = 'backup/'        # Pasta para armazenar backups
+PASTA_X = 'captured_images/'  
+BACKUP_DIR = 'backup/'       
 
 def backup_imagens():
     # Compacta e faz backup das imagens da PASTA_X

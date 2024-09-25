@@ -6,9 +6,9 @@ import keyboard
 import os
 
 if __name__ == "__main__":
+    alunos = []
 
     while True:
-        # Captura de imagem ao detectar movimento
         print("Iniciar Reconhecimento?(Y/N)")
 
         if keyboard.read_key() == "n":
@@ -17,32 +17,28 @@ if __name__ == "__main__":
             print("Iniciando...")
             imagem_capturada = capturar_imagem()
 
-            alunos = []
 
             if imagem_capturada:
+                print("Analizando...")
+
                 aluno = reconhecer_face(imagem_capturada)
 
                 if aluno:
-                    alunos.append('captured_images/'+aluno)
+                    alunos.append('./'+imagem_capturada)
                 else:
-                #     enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
                     print("pessoa desconhecida")
+                # Enviar e-mail de alerta para pessoa não identificada
+                    enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
 
                 print("Enviar email?(Y/N)")
 
                 if keyboard.read_key() == "y":
-                    print("enviou o email")
+                    #print("enviou o email")
+                    if aluno:
+                        enviar_email("Aluno reconhecido", f"Aluno identificado: {aluno}", alunos)
+                    
                 elif keyboard.read_key() == "n":
                     os.system("cls")
-
-                
-
-                # if aluno:
-                #     # Enviar e-mail com dados do aluno reconhecido
-                #     enviar_email("Aluno reconhecido", f"Aluno identificado: {aluno}", imagem_capturada)
-                # else:
-                #     # Enviar e-mail de alerta para pessoa não identificada
-                #     enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
 
                 # Fazer backup das imagens ao final do dia
                 hora_atual = datetime.now().hour

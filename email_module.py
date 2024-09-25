@@ -1,8 +1,8 @@
 import yagmail
 
-EMAIL_FROM = "contaemail776@gmail.com"  # E-mail do remetente
-EMAIL_PASSWORD = "owfg ldlt wkvn bfbt"        # Senha do e-mail
-EMAIL_TO = "lucasmotta-2011@hotmail.com"  # E-mail do destinatário
+EMAIL_FROM = "contaemail776@gmail.com" 
+EMAIL_PASSWORD = "owfg ldlt wkvn bfbt"    
+EMAIL_TO = "lucasmotta-2011@hotmail.com"  
 
 def enviar_email(assunto, mensagem, arquivos=None):
     yag = yagmail.SMTP(EMAIL_FROM, EMAIL_PASSWORD)
@@ -10,7 +10,7 @@ def enviar_email(assunto, mensagem, arquivos=None):
     try:
         if arquivos:
             # Enviar e-mail com anexo
-            yag.send(to=EMAIL_TO, subject=assunto, contents=mensagem, attachments= arquivos)
+            yag.send(to=EMAIL_TO, subject=assunto, contents=mensagem, attachments=arquivos)
         else:
             # Enviar e-mail sem anexo
             yag.send(to=EMAIL_TO, subject=assunto, contents=mensagem)

@@ -14,7 +14,7 @@ def capturar_imagem():
     mp_solution = mp.solutions.face_detection
     mp_recognition = mp_solution.FaceDetection()
     mp_draw = mp.solutions.drawing_utils
-
+    os.system("cls")
     while True:        
         ret, frame = cap.read()
 
@@ -33,6 +33,7 @@ def capturar_imagem():
                 # Salvando imagem na PASTA_X
                 filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
                 cv2.imwrite(filename, frame)
+                cv2.destroyAllWindows()
                 return filename
             else:
                 print('Erro ao capturar a imagem')
