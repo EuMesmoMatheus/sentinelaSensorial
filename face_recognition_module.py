@@ -1,5 +1,6 @@
 import cv2
 import face_recognition
+import mediapipe as mp
 import os
 from datetime import datetime
 
@@ -8,18 +9,39 @@ PASTA_Y = 'student_images/'   # Pasta onde estão as imagens dos alunos
 
 def capturar_imagem():
     # Inicializando webcam
+
     cap = cv2.VideoCapture(0)
-    ret, frame = cap.read()
+    mp_solution = mp.solutions.face_detection
+    mp_recognition = mp_solution.FaceDetection()
+    mp_draw = mp.solutions.drawing_utils
+
+    while True:        
+        ret, frame = cap.read()
+
+        rostos = mp_recognition.process(frame)
+
+        if rostos.detections:
+            for rosto in rostos.detections:
+                mp_draw.draw_detection(frame, rosto)
+
+        cv2.imshow("Rosto",frame)
+
+        if cv2.waitKey(5) == 27:
+            break
+        elif cv2.waitKey(5) == 13:
+            if ret:
+                # Salvando imagem na PASTA_X
+                filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
+                cv2.imwrite(filename, frame)
+                return filename
+            else:
+                print('Erro ao capturar a imagem')
+                return None
+    cv2.destroyAllWindows()
     cap.release()
-    
-    if ret:
-        # Salvando imagem na PASTA_X
-        filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
-        cv2.imwrite(filename, frame)
-        return filename
-    else:
-        print('Erro ao capturar a imagem')
-        return None
+
+
+
 
 def reconhecer_face(image_path):
     # Carregando a imagem capturada
