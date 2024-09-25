@@ -107,4 +107,4 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 Instale as dependências:
 
 ```bash
-pip install face_recognition opencv-python yagmail
+pip install face_recognition opencv-python yagmail keyboard mediapipe
