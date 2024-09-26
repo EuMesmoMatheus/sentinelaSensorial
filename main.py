@@ -41,6 +41,6 @@ if __name__ == "__main__":
                     os.system("cls")
 
                 # Fazer backup das imagens ao final do dia
-                hora_atual = datetime.now().hour
+                hora_atual = 23
                 if hora_atual >= 23:
                     backup_imagens()
