@@ -15,15 +15,19 @@ def capturar_imagem():
     mp_recognition = mp_solution.FaceDetection()
     mp_draw = mp.solutions.drawing_utils
     alunos_reconhecidos = []
+    faces_reconhecidas = []
     faces_desconhecidas = []
 
     cap.set(3,640)
     cap.set(4,480)
 
     frame_count = 0
+    
 
     while True:
         ret, frame = cap.read()
+        cv2.imshow("Rosto",frame)
+        filename = ""
 
         if not ret:
             break
@@ -43,13 +47,20 @@ def capturar_imagem():
                     results = face_recognition.compare_faces([student_encoding], face_encoding)
                     face_distance = face_recognition.face_distance([student_encoding], face_encoding)
 
-                    if results[0]:
+                    if results[0] and file not in alunos_reconhecidos:
                         label = f'{file} (Distancia: {face_distance[0]:.2f})'
                         color = (0,255,0)
                         desenha_retangulo(frame,left,top,right,bottom,label,color)
                         filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
                         cv2.imwrite(filename, frame)
-                        alunos_reconhecidos.append("./"+filename)
+                        alunos_reconhecidos.append(file)
+                        faces_reconhecidas.append("./"+filename)
+                        break
+                    elif results[0] and file in alunos_reconhecidos:
+                        label = f'{file} (Distancia: {face_distance[0]:.2f})'
+                        color = (0,255,0)
+                        desenha_retangulo(frame,left,top,right,bottom,label,color)
+                        break
                     else:
                         label = "Desconhecido"
                         color = (0,0,255)
@@ -57,10 +68,10 @@ def capturar_imagem():
                         filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
                         cv2.imwrite(filename, frame)
                         faces_desconhecidas.append("./"+filename)
+                        break
 
                 
 
-        cv2.imshow("Rosto",frame)
                 
         frame_count += 1
 
@@ -69,7 +80,7 @@ def capturar_imagem():
     cap.release()
     cv2.destroyAllWindows()
     
-    return alunos_reconhecidos, faces_desconhecidas
+    return faces_reconhecidas, faces_desconhecidas
 
 def desenha_retangulo(frame,l,t,r,b,nome, cor):
     cv2.rectangle(frame, (l,t), (r, b), cor, 2)
