@@ -9,38 +9,25 @@ if __name__ == "__main__":
     alunos = []
 
     while True:
-        print("Iniciar Reconhecimento?(Y/N)")
+        
+        print("Iniciando...")
+        alunos_capturados = capturar_imagem()
+    
+        # Enviar e-mail de alerta para pessoa não identificada
+            #enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
 
-        if keyboard.read_key() == "n":
-            break
-        elif keyboard.read_key() == "y":
-            print("Iniciando...")
-            imagem_capturada = capturar_imagem()
+        print("Enviar email?(Y/N)")
 
+        if keyboard.read_key() == "y":
+            print("enviou o email")
+            #enviar_email("Aluno reconhecido", f"Aluno identificado: {aluno}", alunos)
+            
+        elif keyboard.read_key() == "n":
+            os.system("cls")
 
-            if imagem_capturada:
-                print("Analizando...")
+        # Fazer backup das imagens ao final do dia
+        hora_atual = datetime.now().hour
+        if hora_atual >= 23:
+            backup_imagens()
 
-                aluno = reconhecer_face(imagem_capturada)
-
-                if aluno:
-                    alunos.append('./'+imagem_capturada)
-                else:
-                    print("pessoa desconhecida")
-                # Enviar e-mail de alerta para pessoa não identificada
-                    enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
-
-                print("Enviar email?(Y/N)")
-
-                if keyboard.read_key() == "y":
-                    #print("enviou o email")
-                    if aluno:
-                        enviar_email("Aluno reconhecido", f"Aluno identificado: {aluno}", alunos)
-                    
-                elif keyboard.read_key() == "n":
-                    os.system("cls")
-
-                # Fazer backup das imagens ao final do dia
-                hora_atual = 23
-                if hora_atual >= 23:
-                    backup_imagens()
+        break
