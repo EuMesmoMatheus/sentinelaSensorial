@@ -18,27 +18,24 @@ def capturar_imagem():
     faces_reconhecidas = []
     faces_desconhecidas = []
 
-    cap.set(3,640)
-    cap.set(4,480)
+    # cap.set(3, 640)
+    # cap.set(4, 480)
 
     frame_count = 0
-    
 
     while True:
         ret, frame = cap.read()
-        cv2.imshow("Rosto",frame)
-        filename = ""
 
         if not ret:
             break
 
-        if frame_count % 150 == 0:
-
-
+        # Detecção de rosto a cada 150 frames
+        if frame_count % 150 == 0:  
             face_locations = face_recognition.face_locations(frame)
-            face_encodings = face_recognition.face_encodings(frame,face_locations)
+            face_encodings = face_recognition.face_encodings(frame, face_locations)
 
             for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
+                match_found = False
                 for file in os.listdir(PASTA_Y):
                     student_image_path = os.path.join(PASTA_Y, file)
                     student_image = face_recognition.load_image_file(student_image_path)
@@ -47,40 +44,47 @@ def capturar_imagem():
                     results = face_recognition.compare_faces([student_encoding], face_encoding)
                     face_distance = face_recognition.face_distance([student_encoding], face_encoding)
 
-                    if results[0] and file not in alunos_reconhecidos:
-                        label = f'{file} (Distancia: {face_distance[0]:.2f})'
-                        color = (0,255,0)
-                        desenha_retangulo(frame,left,top,right,bottom,label,color)
-                        filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
-                        cv2.imwrite(filename, frame)
-                        alunos_reconhecidos.append(file)
-                        faces_reconhecidas.append("./"+filename)
-                        break
-                    elif results[0] and file in alunos_reconhecidos:
-                        label = f'{file} (Distancia: {face_distance[0]:.2f})'
-                        color = (0,255,0)
-                        desenha_retangulo(frame,left,top,right,bottom,label,color)
-                        break
-                    else:
-                        label = "Desconhecido"
-                        color = (0,0,255)
-                        desenha_retangulo(frame,left,top,right,bottom,label,color)
-                        filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
-                        cv2.imwrite(filename, frame)
-                        faces_desconhecidas.append("./"+filename)
+                    if results[0]:  # Se houver uma correspondência
+                        if file not in alunos_reconhecidos:
+                            label = f'{file} (Distancia: {face_distance[0]:.2f})'
+                            color = (0, 255, 0)
+                            desenha_retangulo(frame, left, top, right, bottom, label, color)
+                            filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
+                            cv2.imwrite(filename, frame)
+                            alunos_reconhecidos.append(file)
+                            faces_reconhecidas.append("./" + filename)
+                        else:
+                            label = f'{file} (Distancia: {face_distance[0]:.2f})'
+                            color = (0, 255, 0)
+                            desenha_retangulo(frame, left, top, right, bottom, label, color)
+
+                        match_found = True
                         break
 
-                
+                if not match_found:  # Caso nenhum rosto conhecido seja encontrado
+                    label = "Desconhecido"
+                    color = (0, 0, 255)
+                    desenha_retangulo(frame, left, top, right, bottom, label, color)
+                    filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
+                    cv2.imwrite(filename, frame)
+                    faces_desconhecidas.append("./" + filename)
+            cv2.imshow("Webcam ao vivo", frame)
+            cv2.waitKey(2000)
 
-                
+        # Exibe o frame atualizado na mesma janela da webcam
+        cv2.imshow("Webcam ao vivo", frame)
+
         frame_count += 1
 
-        if cv2.waitKey(5) == 27:
+        # Sai do loop ao pressionar a tecla 'ESC'
+        if cv2.waitKey(1) == 27:
             break
+
     cap.release()
     cv2.destroyAllWindows()
-    
-    return faces_reconhecidas, faces_desconhecidas
+
+    return faces_reconhecidas, alunos_reconhecidos, faces_desconhecidas
+
 
 def desenha_retangulo(frame,l,t,r,b,nome, cor):
     cv2.rectangle(frame, (l,t), (r, b), cor, 2)

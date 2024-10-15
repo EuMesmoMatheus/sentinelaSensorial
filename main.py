@@ -12,7 +12,10 @@ if __name__ == "__main__":
         
         print("Iniciando...")
         alunos_capturados = capturar_imagem()
-    
+
+        for aluno in alunos_capturados[1]:
+            alunos.append(aluno)
+            print(alunos)
         # Enviar e-mail de alerta para pessoa não identificada
             #enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
 
