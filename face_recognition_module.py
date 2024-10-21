@@ -1,6 +1,6 @@
-import cv2
-import face_recognition
-import mediapipe as mp
+import cv2 # type: ignore
+import face_recognition # type: ignore
+import mediapipe as mp # type: ignore
 import os
 from datetime import datetime
 
@@ -18,8 +18,8 @@ def capturar_imagem():
     faces_reconhecidas = []
     faces_desconhecidas = []
 
-    # cap.set(3, 640)
-    # cap.set(4, 480)
+    cap.set(3, 640)
+    cap.set(4, 480)
 
     frame_count = 0
 
@@ -89,29 +89,3 @@ def capturar_imagem():
 def desenha_retangulo(frame,l,t,r,b,nome, cor):
     cv2.rectangle(frame, (l,t), (r, b), cor, 2)
     cv2.putText(frame,nome,(l,t-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, cor, 2)
-
-def reconhecer_face(image_path):
-    # Carregando a imagem capturada
-    imagem_capturada = face_recognition.load_image_file(image_path)
-    face_encodings_capturada = face_recognition.face_encodings(imagem_capturada)
-
-    if len(face_encodings_capturada) > 0:
-        face_capturada = face_encodings_capturada[0]
-    else:
-        print('Nenhuma face reconhecida na imagem capturada')
-        return None
-
-    # Comparando com as imagens da PASTA_Y (alunos)
-    for file in os.listdir(PASTA_Y):
-        student_image_path = os.path.join(PASTA_Y, file)
-        student_image = face_recognition.load_image_file(student_image_path)
-        student_encoding = face_recognition.face_encodings(student_image)[0]
-
-        results = face_recognition.compare_faces([student_encoding], face_capturada)
-
-        if results[0]:
-            print(f'Aluno reconhecido: {file}')
-            return file
-
-    print('Pessoa não identificada')
-    return None

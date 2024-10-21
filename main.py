@@ -2,7 +2,7 @@ from face_recognition_module import capturar_imagem, reconhecer_face
 from email_module import enviar_email
 from backup_module import backup_imagens
 from datetime import datetime
-import keyboard
+import keyboard # type: ignore
 import os
 
 if __name__ == "__main__":
