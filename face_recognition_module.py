@@ -1,19 +1,29 @@
 import cv2 # type: ignore
 import face_recognition # type: ignore
-import mediapipe as mp # type: ignore
 import os
+import requests
+import numpy as np
 from datetime import datetime
 
 PASTA_X = 'captured_images/'  # Pasta onde as imagens capturadas serão salvas
 PASTA_Y = 'student_images/'   # Pasta onde estão as imagens dos alunos
 
+def carregar_imagem(url):
+    response = requests.get(url)
+    img_array = np.array(bytearray(response.content), dtype=np.uint8)
+    image = cv2.imdecode(img_array, -1)
+    return image
 
-def capturar_imagem():
+
+def capturar_imagem(students_list):
+    lista_alunos = []
+    for aluno in students_list:
+        aluno_nome, aluno_link = aluno
+        aluno_foto = carregar_imagem(aluno_link)
+        lista_alunos.append([aluno_nome,aluno_foto])
+
     # Inicializa webcam
     cap = cv2.VideoCapture(0)
-    mp_solution = mp.solutions.face_detection
-    mp_recognition = mp_solution.FaceDetection()
-    mp_draw = mp.solutions.drawing_utils
     alunos_reconhecidos = []
     faces_reconhecidas = []
     faces_desconhecidas = []
@@ -36,25 +46,25 @@ def capturar_imagem():
 
             for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
                 match_found = False
-                for file in os.listdir(PASTA_Y):
-                    student_image_path = os.path.join(PASTA_Y, file)
-                    student_image = face_recognition.load_image_file(student_image_path)
+                for aluno in lista_alunos:
+                    aluno_nome, aluno_link = aluno
+                    student_image = aluno_link
                     student_encoding = face_recognition.face_encodings(student_image)[0]
 
                     results = face_recognition.compare_faces([student_encoding], face_encoding)
                     face_distance = face_recognition.face_distance([student_encoding], face_encoding)
 
                     if results[0]:  # Se houver uma correspondência
-                        if file not in alunos_reconhecidos:
-                            label = f'{file} (Distancia: {face_distance[0]:.2f})'
+                        if aluno_nome not in alunos_reconhecidos:
+                            label = f'{aluno_nome} (Distancia: {face_distance[0]:.2f})'
                             color = (0, 255, 0)
                             desenha_retangulo(frame, left, top, right, bottom, label, color)
-                            filename = PASTA_X + datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
+                            filename = PASTA_X +f"{aluno_nome}_"+ datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
                             cv2.imwrite(filename, frame)
-                            alunos_reconhecidos.append(file)
+                            alunos_reconhecidos.append(aluno_nome)
                             faces_reconhecidas.append("./" + filename)
                         else:
-                            label = f'{file} (Distancia: {face_distance[0]:.2f})'
+                            label = f'{aluno_nome} (Distancia: {face_distance[0]:.2f})'
                             color = (0, 255, 0)
                             desenha_retangulo(frame, left, top, right, bottom, label, color)
 

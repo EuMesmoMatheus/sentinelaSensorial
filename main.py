@@ -1,6 +1,7 @@
-from face_recognition_module import capturar_imagem, reconhecer_face
+from face_recognition_module import capturar_imagem
 from email_module import enviar_email
 from backup_module import backup_imagens
+from database_module import inicia_banco, baixa_fotos
 from datetime import datetime
 import keyboard # type: ignore
 import os
@@ -11,7 +12,11 @@ if __name__ == "__main__":
     while True:
         
         print("Iniciando...")
-        alunos_capturados = capturar_imagem()
+        db = inicia_banco()
+        
+        lista_alunos = baixa_fotos(db)
+
+        alunos_capturados = capturar_imagem(lista_alunos)
 
         for aluno in alunos_capturados[1]:
             alunos.append(aluno)
