@@ -2,4 +2,6 @@ face_recognition
 opencv-python
 yagmail
 keyboard
-mediapipe
+firebase_admin
+numpy
+requests
