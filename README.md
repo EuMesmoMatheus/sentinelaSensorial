@@ -104,6 +104,12 @@ O projeto "Sentinela Sensorial" visa criar um sistema de segurança inteligente 
 
 ### Pré-requisitos
 
+Instalar o CMake versão 3.30.3:
+[CMAKE](https://github.com/Kitware/CMake/releases/tag/v3.30.3)
+
+Instalar o Python versão 3.10.11:
+[Python](https://www.python.org/downloads/release/python-31110/)
+
 Instale as dependências:
 
 ```bash
