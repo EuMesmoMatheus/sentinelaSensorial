@@ -6,7 +6,7 @@ import numpy as np
 from datetime import datetime
 
 PASTA_X = 'captured_images/'  # Pasta onde as imagens capturadas serão salvas
-PASTA_Y = 'student_images/'   # Pasta onde estão as imagens dos alunos
+#PASTA_Y = 'student_images/'   # Pasta onde estão as imagens dos alunos
 
 def carregar_imagem(url):
     response = requests.get(url)
@@ -81,7 +81,6 @@ def capturar_imagem(students_list):
             cv2.imshow("Webcam ao vivo", frame)
             cv2.waitKey(2000)
 
-        # Exibe o frame atualizado na mesma janela da webcam
         cv2.imshow("Webcam ao vivo", frame)
 
         frame_count += 1
