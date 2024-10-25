@@ -13,7 +13,7 @@ Catolica SC
 - Pablo Lopes
 
 ## Confluence
-[https://projetoslofy.atlassian.net/wiki/spaces/SS/pages/9240577/Sentinela+Sensorial+-+Objetivo(Documentação do Projeto)]
+(Documentação do Projeto[https://projetoslofy.atlassian.net/wiki/spaces/SS/pages/9240577/Sentinela+Sensorial+-+Objetivo])
 
 ## Como Executar o Projeto
 
