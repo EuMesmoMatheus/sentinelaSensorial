@@ -8,6 +8,7 @@ import os
 
 if __name__ == "__main__":
     alunos = []
+    desconhecidos = []
 
     while True:
         
@@ -16,19 +17,22 @@ if __name__ == "__main__":
         
         lista_alunos = baixa_fotos(db)
 
-        alunos_capturados = capturar_imagem(lista_alunos)
+        alunos_capturados= capturar_imagem(lista_alunos)
 
-        for aluno in alunos_capturados[1]:
+        for aluno in alunos_capturados[0]:
             alunos.append(aluno)
             print(alunos)
         # Enviar e-mail de alerta para pessoa não identificada
-            #enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", imagem_capturada)
+        for pessoa in alunos_capturados[2]:
+            desconhecidos.append(pessoa)
+
+        if len(desconhecidos) > 0:
+            enviar_email("Pessoa não identificada", "A pessoa capturada não foi identificada", desconhecidos)
 
         print("Enviar email?(Y/N)")
 
         if keyboard.read_key() == "y":
-            print("enviou o email")
-            #enviar_email("Aluno reconhecido", f"Aluno identificado: {aluno}", alunos)
+            enviar_email("Aluno reconhecido", f"Aluno identificado: {alunos}", alunos)
             
         elif keyboard.read_key() == "n":
             os.system("cls")

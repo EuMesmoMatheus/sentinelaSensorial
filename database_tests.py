@@ -6,6 +6,7 @@ class TestDatabaseModule(unittest.TestCase):
 
     @patch('firebase_admin.initialize_app')
     @patch('firebase_admin.firestore.client')
+
     def test_inicia_banco(self, mock_firestore_client, mock_initialize_app):
         mock_firestore_client.return_value = MagicMock()
 
@@ -15,6 +16,8 @@ class TestDatabaseModule(unittest.TestCase):
         self.assertIsNotNone(db)
 
     @patch('firebase_admin.firestore.client')
+
+    
     def test_baixa_fotos(self, mock_firestore_client):
         # Cria um mock para a coleção "alunos"
         mock_db = MagicMock()

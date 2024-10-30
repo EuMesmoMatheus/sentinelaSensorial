@@ -23,7 +23,7 @@ def capturar_imagem(students_list):
         lista_alunos.append([aluno_nome,aluno_foto])
 
     # Inicializa webcam
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     alunos_reconhecidos = []
     faces_reconhecidas = []
     faces_desconhecidas = []

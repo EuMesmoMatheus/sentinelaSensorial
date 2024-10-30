@@ -20,6 +20,7 @@ class TestFaceRecognitionModule(unittest.TestCase):
 
     @patch('cv2.rectangle')
     @patch('cv2.putText')
+    
     def test_desenha_retangulo(self, mock_putText, mock_rectangle):
         frame = np.zeros((480, 640, 3), dtype=np.uint8)
         desenha_retangulo(frame, 10, 20, 30, 40, "Test", (255, 0, 0))
