@@ -18,15 +18,17 @@ def carregar_imagem(url):
 def capturar_imagem(students_list):
     lista_alunos = []
     for aluno in students_list:
-        aluno_nome, aluno_link = aluno
+        aluno_nome, aluno_link, aluno_id = aluno
         aluno_foto = carregar_imagem(aluno_link)
-        lista_alunos.append([aluno_nome,aluno_foto])
+        lista_alunos.append([aluno_nome,aluno_foto, aluno_id])
 
     # Inicializa webcam
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     alunos_reconhecidos = []
+    alunos_count = []
     faces_reconhecidas = []
     faces_desconhecidas = []
+
 
     cap.set(3, 640)
     cap.set(4, 480)
@@ -47,7 +49,7 @@ def capturar_imagem(students_list):
             for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
                 match_found = False
                 for aluno in lista_alunos:
-                    aluno_nome, aluno_link = aluno
+                    aluno_nome, aluno_link, aluno_id = aluno
                     student_image = aluno_link
                     student_encoding = face_recognition.face_encodings(student_image)[0]
 
@@ -55,16 +57,17 @@ def capturar_imagem(students_list):
                     face_distance = face_recognition.face_distance([student_encoding], face_encoding)
 
                     if results[0]:  # Se houver uma correspondência
-                        if aluno_nome not in alunos_reconhecidos:
-                            label = f'{aluno_nome} (Distancia: {face_distance[0]:.2f})'
+                        if aluno_nome not in alunos_count:
+                            label = f'{aluno_nome} Matricula:{aluno_id}'
                             color = (0, 255, 0)
                             desenha_retangulo(frame, left, top, right, bottom, label, color)
                             filename = PASTA_X +f"{aluno_nome}_"+ datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
                             cv2.imwrite(filename, frame)
-                            alunos_reconhecidos.append(aluno_nome)
+                            alunos_reconhecidos.append([aluno_nome, aluno_id, datetime.now().strftime("%H:%M:%S")])
+                            alunos_count.append(aluno_nome)
                             faces_reconhecidas.append("./" + filename)
                         else:
-                            label = f'{aluno_nome} (Distancia: {face_distance[0]:.2f})'
+                            label = f'{aluno_nome} Matricula:{aluno_id}'
                             color = (0, 255, 0)
                             desenha_retangulo(frame, left, top, right, bottom, label, color)
 

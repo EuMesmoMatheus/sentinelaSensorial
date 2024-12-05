@@ -7,7 +7,7 @@ BACKUP_DIR = 'backup/'
 
 def backup_imagens():
     # Compacta e faz backup das imagens da PASTA_X
-    zip_filename = BACKUP_DIR + f'backup_{datetime.now().strftime("%Y%m%d")}.zip'
+    zip_filename = BACKUP_DIR + f'backup_{datetime.now().strftime("%d-%m-%Y")}.zip'
     with zipfile.ZipFile(zip_filename, 'w') as zipf:
         for foldername, subfolders, filenames in os.walk(PASTA_X):
             for filename in filenames:

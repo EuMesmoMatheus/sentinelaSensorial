@@ -20,8 +20,9 @@ def baixa_fotos(db):
         dados = doc.to_dict()
         nome = dados.get('nome')
         foto_ref = dados.get('foto')
+        matricula = dados.get('matricula')
 
         if nome and foto_ref:
-            lista_links.append([nome, foto_ref])
+            lista_links.append([nome, foto_ref, matricula])
 
     return lista_links
